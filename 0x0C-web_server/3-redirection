@@ -1,35 +1,10 @@
 #!/usr/bin/env bash
-
-# Update the system
-sudo apt-get -y  update
-
-# Install Nginx
+# Configure your Nginx server so that /redirect_me is redirecting
+# to another page.
+sudo apt-get update -y
 sudo apt-get install -y nginx
 
-# Create a new server block configuration for the redirection
-cat <<EOF > /etc/nginx/sites-available/redirect
-server {
-    listen 80;
-    server_name olecko.tech;
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://twitter.com/realmc_paul permanent;" /etc/nginx/sites-enabled/default
 
-    location /redirect_me {
-        return 301 https://www.twitter.com/realmc_paul;
-    }
-
-    location / {
-        return 404;
-    }
-}
-EOF
-
-# Enable the new server block
-ln -s /etc/nginx/sites-available/redirect /etc/nginx/sites-enabled/
-
-# Remove default Nginx server block
-rm /etc/nginx/sites-enabled/default
-
-# Test Nginx configuration
-nginx -t
-
-# Restart Nginx to apply the changes
 sudo service nginx restart
