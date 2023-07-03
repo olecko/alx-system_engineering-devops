@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# configures a new HAproxy as a load balancer
+
+# Install HAproxy on a server
+sudo apt-get -y update
+apt-get -y install haprox
+
+# Configure haproxy configuration file to distribute requests using a roundrobin algorithm
+server_config=\
+'
+frontend olecko.tech
+        bind 0:80
+	mode http
+        default_backend olecko-backend
+
+backend olecko.tech-backend
+        balance roundrobin
+        server 140484-web-01 52.3.242.228:80 check 
+        server 140484-web-02 52.73.32.236:80 check
+'
+echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# enable haproxy to be started by init script
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# Restart HAproxy service
+sudo service haproxy restart
