@@ -3,7 +3,7 @@
 
 # Install HAproxy on a server
 sudo apt-get -y update
-apt-get -y install haprox
+sudo apt-get -y install haprox
 
 # Configure haproxy configuration file to distribute requests using a roundrobin algorithm
 server_config=\
@@ -11,7 +11,7 @@ server_config=\
 frontend olecko.tech
         bind 0:80
 	mode http
-        default_backend olecko-backend
+        default_backend olecko.tech-backend
 
 backend olecko.tech-backend
         balance roundrobin
