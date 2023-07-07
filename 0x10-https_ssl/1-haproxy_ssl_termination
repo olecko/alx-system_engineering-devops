@@ -38,7 +38,7 @@ frontend myfrontend
         default_backend myservers
 
 frontend www-https
-        bind *:443 ssl crt /etc/haproxy/certs/cert_dns.pem
+        bind *:443 ssl crt /etc/haproxy/certs/olecko.tech.pem
         http-request add-header X-Forwarded-Proto https
         acl letsencrypt-req path_beg /.well-known/acme-challenge/
         use_backend letsencrypt if letsencrypt-req
