@@ -5,21 +5,23 @@
 * Firewalls are categorized as a network-based or a host-based system. Network-based firewalls are positioned between two or more networks, typically between the local area network (LAN) and wide area network (WAN), their basic function is to control the flow of data between connected networks. On the other hand, Host-based firewalls are deployed directly on the host itself to control network traffic or other computing resources.
 
 ## Tasks
---------------------------------
---------------------------------
+
 0. **Block all incoming traffic but**
+
 Let’s install the `ufw` firewall and setup a few rules on `web-01`.
 
 ###### Requirements:
 
 The requirements below must be applied to `web-01` (feel free to do it on `lb-01` and `web-02`, but it won’t be checked)
 Configure `ufw` so that it blocks all incoming traffic, except the following TCP ports:
-	~ `22` (SSH)
-	~ `443` (HTTPS SSL)
-	~ `80` (HTTP)
+
+	- `22` (SSH)
+	- `443` (HTTPS SSL)
+	- `80` (HTTP)
 Share the `ufw` commands that you used in your answer file
 
 1. **Port forwarding**
+
 Firewalls can not only filter requests, they can also forward them.
 
 ###### Requirements:
